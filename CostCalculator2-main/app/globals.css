@@ -1,0 +1,583 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: white;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.calculator-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    overflow: hidden;
+}
+
+.form-container {
+    padding: 40px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #000000;
+    font-size: 0.9em;
+}
+
+.form-group select,
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group select:focus,
+.form-group input[type="number"]:focus {
+    outline: none;
+    border-color: #f3ae46;
+    box-shadow: 0 0 0 3px rgba(243, 174, 70, 0.2);
+}
+
+.form-group.checkbox-group {
+    grid-column: 1 / -1;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    font-weight: 600;
+    color: #000000;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 12px;
+    margin-top: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+    accent-color: #f3ae46;
+}
+
+/* Unified Results Section */
+.results-container {
+    margin-top: 30px;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 25px;
+    display: none;
+}
+
+.results-container.show {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.column-header h3 {
+    font-size: 1.1em;
+    color: #000;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+/* Left Column: Tuition */
+.final-price-section {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #863b42;
+    border-radius: 8px;
+    border: none;
+    color: white;
+}
+
+.final-price-label {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.final-price-large {
+    font-size: 1.4em;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin: 5px 0;
+}
+
+.compact-breakdown {
+    font-size: 0.85em;
+    margin-bottom: 20px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.breakdown-item.discount {
+    color: #863b42;
+}
+
+.breakdown-item.total {
+    font-weight: 700;
+    color: #000;
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+.breakdown-divider {
+    height: 1px;
+    background: #ddd;
+    margin: 8px 0;
+}
+
+/* Right Column: Payments */
+.deposit-banner {
+    background: #fff8ee;
+    border-left: 3px solid #f3ae46;
+    padding: 8px 12px;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #863b42;
+    margin-bottom: 15px;
+}
+
+.payment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.payment-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-type {
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #000;
+}
+
+.payment-sub {
+    font-size: 0.75em;
+    color: #666;
+}
+
+.payment-cost {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.cost-amount {
+    font-weight: 700;
+    color: #863b42;
+    font-size: 1em;
+}
+
+.cost-note {
+    font-size: 0.7em;
+    color: #888;
+}
+
+.contact-mini {
+    margin-top: 15px;
+    font-size: 0.8em;
+    text-align: center;
+    color: #666;
+}
+
+.contact-mini a {
+    color: #863b42;
+    text-decoration: underline;
+}
+
+.disclaimer-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 0.7em;
+    color: #888;
+    font-style: italic;
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+.checkbox-text {
+    line-height: 1.4;
+}
+
+.form-note {
+    font-size: 0.75em;
+    color: #6c757d;
+    font-style: italic;
+    line-height: 1.3;
+    margin-top: 5px;
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #f3ae46 0%, #863b42 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.calculate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(243, 174, 70, 0.4);
+}
+
+.results {
+    margin-top: 30px;
+    padding: 30px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    display: none;
+}
+
+.results.show {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #d6d2d2;
+}
+
+.result-row.final-row {
+    border-bottom: none;
+    font-weight: 700;
+    font-size: 1em;
+    color: #000000;
+    background: #ffffff;
+    border: 2px solid #d3b0b4;
+    padding: 20px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    line-height: 1.3;
+}
+
+.result-label {
+    font-weight: 600;
+    color: #000000;
+    font-size: 0.85em;
+}
+
+.result-value {
+    font-weight: 700;
+    color: #080001;
+    font-size: 0.85em;
+}
+
+.discount-info {
+    background: #fff8ee;
+    border-left: 4px solid #f3ae46;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.75em;
+}
+
+.discount-info strong {
+    color: #863b42;
+}
+
+.discount-info a {
+    color: #f3ae46;
+    text-decoration: none;
+    border-bottom: 1px solid #f3ae46;
+    transition: all 0.3s ease;
+}
+
+.discount-info a:hover {
+    color: #863b42;
+    border-bottom-color: #863b42;
+}
+
+.choice-program {
+    background: #fff8ee;
+    border-left: 4px solid #f3ae46;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.75em;
+}
+
+.choice-program strong {
+    color: #863b42;
+}
+
+.disclaimer-results {
+    background: #ffebee;
+    border-left: 4px solid #863b42;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.75em;
+    line-height: 1.4;
+    color: #863b42;
+}
+
+.error-message {
+    background: #ffebee;
+    border-left: 4px solid #863b42;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    color: #863b42;
+    display: block;
+    font-size: 0.75em;
+}
+
+.grade-warning {
+    background: #ffebee;
+    border-left: 4px solid #d32f2f;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    color: #d32f2f;
+    display: block;
+    font-weight: 600;
+    font-size: 0.75em;
+}
+
+.marriage-note {
+    background: #fafafa;
+    border-left: 4px solid #863b42;
+    padding: 18px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    color: #333333;
+    display: block;
+    font-size: 0.75em;
+    line-height: 1.5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.marriage-note strong {
+    color: #333333;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.payment-plans {
+    margin-top: 30px;
+    padding: 30px;
+    background: #fafafa;
+    border-radius: 12px;
+    display: none;
+}
+
+.payment-plans.show {
+    display: block;
+    animation: slideIn 0.5s ease;
+}
+
+.payment-plans h3 {
+    color: #000000;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.deposit-info {
+    background: #fff8ee;
+    border-left: 4px solid #f3ae46;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    color: #863b42;
+    font-size: 0.75em;
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.payment-option {
+    background: white;
+    border: 2px solid #d3b0b4;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.payment-option:hover {
+    border-color: #f3ae46;
+    box-shadow: 0 5px 15px rgba(243, 174, 70, 0.2);
+}
+
+.payment-title {
+    font-weight: 700;
+    font-size: 0.95em;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.choice-subtitle {
+    font-size: 0.75em;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.payment-amount {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #863b42;
+    margin-bottom: 10px;
+}
+
+.payment-details {
+    font-size: 0.75em;
+    color: #000000;
+    line-height: 1.3;
+}
+
+.contact-option {
+    background: #fff8ee;
+    border: 2px solid #f3ae46;
+}
+
+.contact-text {
+    font-size: 0.75em;
+    color: #000000;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    white-space: normal;
+}
+
+.contact-email {
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.contact-email a {
+    color: #863b42;
+    text-decoration: none;
+    border-bottom: 1px solid #863b42;
+    transition: all 0.3s ease;
+}
+
+.contact-email a:hover {
+    color: #f3ae46;
+    border-bottom-color: #f3ae46;
+}
+
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    .form-container {
+        padding: 25px;
+    }
+    
+    .result-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .result-row.final-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .payment-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-details {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: initial;
+    }
+}
